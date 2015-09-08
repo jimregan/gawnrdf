@@ -15,7 +15,7 @@ my %snsposposmap = (
 	'v' => '2',
 );
 
-my @rels = qw/hyponymOf memberMeronymOf partMeronymOf sameVerbGroupAs similarTo attribute entails/;
+my @rels = qw/hyponymOf memberMeronymOf partMeronymOf sameVerbGroupAs similarTo attribute entails antonymOf participleOf adjectivePertainsTo instanceOf causes instanceOf substanceMeronymOf/;
 my $mrel = join("|", @rels);
 
 my %tomatch = ();
