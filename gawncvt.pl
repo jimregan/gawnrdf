@@ -183,9 +183,15 @@ while (<>) {
 		print LEMON "    rdfs:label \"$en\"\@eng ;\n" if ($en ne 'DUMMY');
 		print LEMON "    rdfs:label \"$gawords[0]\"\@gle ;\n" if ($galist ne 'DUMMY');
 		print LEMON "    wordnet-ontology:part_of_speech wordnet-ontology:$posmap{$pos} .\n\n";
-		print VUWN "<synset-$syn> a wn20schema:$w3wsmap{$vusnspos}Synset ;\n";
-		print VUWN "    wn20schema:synsetId $idxsns{$wnid} ;\n" if (exists $idxsns{$wnid});
-		print VUWN "    rdfs:label \"$gawords[0]\"\@ga .\n\n";
+
+		if ($gawords[0] ne 'DUMMY') {
+			print VUWN "<synset-$syn> a wn20schema:$w3wsmap{$vusnspos}Synset ;\n";
+			print VUWN "    wn20schema:synsetId $idxsns{$wnid} ;\n" if (exists $idxsns{$wnid});
+			print VUWN "    rdfs:label \"$gawords[0]\"\@ga .\n\n";
+		} else {
+			print VUWN "<synset-$syn> a wn20schema:$w3wsmap{$vusnspos}Synset .\n";
+			print VUWN "<synset-$syn> wn20schema:synsetId $idxsns{$wnid} .\n" if (exists $idxsns{$wnid});
+		}
 		for my $wrd (@gawords) {
 			my $wrdid = $wrd;
 			next if ($wrd eq 'DUMMY');
