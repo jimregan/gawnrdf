@@ -235,6 +235,14 @@ while (<>) {
 			print LINKS "${wrdid}-$pos#$seen{$wrdid}-$pos\twordsense-${wrdid}-$w3tmap{$vusnspos}-$seen{$wrdid}\n";
 
 			print LEMON "<${wrdid}-$pos> lemon:sense <${wrdid}-$pos#$seen{$wrdid}-$pos> .\n\n";
+			if (exists $idxsns{$wnid}) {
+				# FIXME: check that these actually exists. But that takes memory.
+				print LEMON "<${wrdid}-$pos> lvont:nearlySameAs mcreu:eus-30-$idxsns{$wnid}-$mcrposmap{$snspos} ,\n";
+				print LEMON "                       mcrca:cat-30-$idxsns{$wnid}-$mcrposmap{$snspos} ,\n";
+				print LEMON "                       mcres:spa-30-$idxsns{$wnid}-$mcrposmap{$snspos} ,\n";
+				print LEMON "                       mcrgl:glg-30-$idxsns{$wnid}-$mcrposmap{$snspos} ,\n";
+				print LEMON "                       mcren:eng-30-$idxsns{$wnid}-$mcrposmap{$snspos} .\n";
+			}
 			print LEMON "<${wrdid}-$pos#$seen{$wrdid}-$pos> a lemon:LexicalSense ;\n";
 			print LEMON "    wordnet-ontology:sense_number $seen{$wrdid} ;\n";
 			if ($wnid ne 'NULL' && $wnid ne '') {
@@ -242,14 +250,6 @@ while (<>) {
 				my $lvwnid = idmangler($wnid);
 				my $lvwntxt = $lexvomap{$snspos};
 				print LEMON "    lvont:nearlySameAs <http://lexvo.org/id/wordnet/30/$lvwntxt/$lvwnid> ;\n";
-				if (exists $idxsns{$wnid}) {
-					# FIXME: check that these actually exists. But that takes memory.
-					print LEMON "    lvont:nearlySameAs mcreu:eus-30-$idxsns{$wnid}-$mcrposmap{$snspos} ,\n";
-					print LEMON "                       mcrca:cat-30-$idxsns{$wnid}-$mcrposmap{$snspos} ,\n";
-					print LEMON "                       mcres:spa-30-$idxsns{$wnid}-$mcrposmap{$snspos} ,\n";
-					print LEMON "                       mcrgl:glg-30-$idxsns{$wnid}-$mcrposmap{$snspos} ,\n";
-					print LEMON "                       mcren:eng-30-$idxsns{$wnid}-$mcrposmap{$snspos} ;\n";
-				}
 			}
 			print LEMON "    lemon:reference <$syn> .\n\n";
 			# This is what the Princeton RDF has, but... that can't be right.
