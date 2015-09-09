@@ -110,11 +110,14 @@ print VUWN <<_END_;
 _END_
 
 my %idxsns = ();
+my %idxsnsvu = ();
 
 while (<SENSES>) {
 	chomp;
 	my @l = split / /, $_;
 	$idxsns{$l[0]} = $l[1];
+	# We need the sense number to get wordsense links to VU
+	$idxsnsvu{$l[0]} = $l[2];
 }
 
 # wordnet-gaeilge/en2wn.po
@@ -220,6 +223,9 @@ while (<>) {
 			print LEMON "    wordnet-ontology:sense_number $seen{$wrdid} ;\n";
 			print VUWN "<wordsense-${wrdid}-$w3tmap{$vusnspos}-$seen{$wrdid}> a wn20schema:$w3wsmap{$vusnspos}Sense ;\n";
 			print VUWN "    rdfs:label \"$wrd\"\@ga ;\n";
+			if ($wnid =~ /([^%]*)%([1-5]):/ && exists $idxsnsvu{$wnid}) {
+				print VUWN "    lvont:nearlySameAs wn30:wordsense-$1-$w3tmap{$2}-$idxsnsvu{$wnid} ;\n";
+			}
 			print VUWN "    wn20schema:word <word-${wrdid}> .\n\n";
 			if ($wnid ne 'NULL' && $wnid ne '') {
 				print LEMON "    wordnet-ontology:old_sense_key \"$wnid\" ;\n";
