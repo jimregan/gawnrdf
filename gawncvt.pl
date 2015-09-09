@@ -237,7 +237,7 @@ while (<>) {
 			print LEMON "<${wrdid}-$pos> lemon:sense <${wrdid}-$pos#$seen{$wrdid}-$pos> .\n\n";
 			if (exists $idxsns{$wnid}) {
 				# FIXME: check that these actually exists. But that takes memory.
-				print LEMON "<${wrdid}-$pos> lvont:nearlySameAs mcreu:eus-30-$idxsns{$wnid}-$mcrposmap{$snspos} ,\n";
+				print LEMON "<$syn> lvont:nearlySameAs mcreu:eus-30-$idxsns{$wnid}-$mcrposmap{$snspos} ,\n";
 				print LEMON "                       mcrca:cat-30-$idxsns{$wnid}-$mcrposmap{$snspos} ,\n";
 				print LEMON "                       mcres:spa-30-$idxsns{$wnid}-$mcrposmap{$snspos} ,\n";
 				print LEMON "                       mcrgl:glg-30-$idxsns{$wnid}-$mcrposmap{$snspos} ,\n";
