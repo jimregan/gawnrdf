@@ -116,6 +116,7 @@ while (<SENSES>) {
 	$idxsns{$l[0]} = $l[1];
 }
 
+# wordnet-gaeilge/en2wn.po
 while (<>) {
 	chomp;
 	if (/^#~ /) {
