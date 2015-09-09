@@ -15,9 +15,9 @@ my $wnid = '';
 my $skipline = 0;
 
 
-open(LEMON, '>>gawn-lemon.ttl') or die "$!\n";
-open(VUWN, '>>gawn-vu.ttl') or die "$!\n";
-open(LINKS, '>>gawn-lemon-vu-links.tsv') or die "$!\n";
+open(LEMON, '>gawn-lemon.ttl') or die "$!\n";
+open(VUWN, '>gawn-vu.ttl') or die "$!\n";
+open(LINKS, '>gawn-lemon-vu-links.tsv') or die "$!\n";
 # index.sense from http://wordnetcode.princeton.edu/3.0/WNdb-3.0.tar.gz
 open(SENSES, '<index.sense') or die "$!\n";
 
