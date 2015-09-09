@@ -17,6 +17,7 @@ my $skipline = 0;
 
 open(LEMON, '>>gawn-lemon.ttl') or die "$!\n";
 open(VUWN, '>>gawn-vu.ttl') or die "$!\n";
+open(LINKS, '>>gawn-lemon-vu-links.tsv') or die "$!\n";
 # index.sense from http://wordnetcode.princeton.edu/3.0/WNdb-3.0.tar.gz
 open(SENSES, '<index.sense') or die "$!\n";
 
@@ -197,6 +198,9 @@ while (<>) {
 			print VUWN "<synset-$syn> a wn20schema:$w3wsmap{$vusnspos}Synset .\n";
 			print VUWN "<synset-$syn> wn20schema:synsetId $idxsns{$wnid} .\n" if (exists $idxsns{$wnid});
 		}
+
+		print LINKS "$syn\tsynset-$syn\n";
+
 		for my $wrd (@gawords) {
 			my $wrdid = $wrd;
 			next if ($wrd eq 'DUMMY');
@@ -215,18 +219,24 @@ while (<>) {
 					print VUWN "<word-$wrdid> a wn20schema:Word ;\n";
 				}
 				print VUWN "    wn20schema:lexicalForm \"$wrd\"\@ga .\n\n";
+
+				print LINKS "${wrdid}-$pos\tword-$wordid\n";
 			} else {
 				$seen{$wrdid}++;
 			}
-			print LEMON "<${wrdid}-$pos> lemon:sense <${wrdid}-$pos#$seen{$wrdid}-$pos> .\n\n";
-			print LEMON "<${wrdid}-$pos#$seen{$wrdid}-$pos> a lemon:LexicalSense ;\n";
-			print LEMON "    wordnet-ontology:sense_number $seen{$wrdid} ;\n";
 			print VUWN "<wordsense-${wrdid}-$w3tmap{$vusnspos}-$seen{$wrdid}> a wn20schema:$w3wsmap{$vusnspos}Sense ;\n";
 			print VUWN "    rdfs:label \"$wrd\"\@ga ;\n";
 			if ($wnid =~ /([^%]*)%([1-5]):/ && exists $idxsnsvu{$wnid}) {
 				print VUWN "    lvont:nearlySameAs wn30:wordsense-$1-$w3tmap{$2}-$idxsnsvu{$wnid} ;\n";
 			}
 			print VUWN "    wn20schema:word <word-${wrdid}> .\n\n";
+			print VUWN "<synset-$syn> wn20schema:containsWordSense <wordsense-${wrdid}-$w3tmap{$vusnspos}-$seen{$wrdid}> .\n";
+
+			print LINKS "${wrdid}-$pos#$seen{$wrdid}-$pos\twordsense-${wrdid}-$w3tmap{$vusnspos}-$seen{$wrdid}\n";
+
+			print LEMON "<${wrdid}-$pos> lemon:sense <${wrdid}-$pos#$seen{$wrdid}-$pos> .\n\n";
+			print LEMON "<${wrdid}-$pos#$seen{$wrdid}-$pos> a lemon:LexicalSense ;\n";
+			print LEMON "    wordnet-ontology:sense_number $seen{$wrdid} ;\n";
 			if ($wnid ne 'NULL' && $wnid ne '') {
 				print LEMON "    wordnet-ontology:old_sense_key \"$wnid\" ;\n";
 				my $lvwnid = idmangler($wnid);
