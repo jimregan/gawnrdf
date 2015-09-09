@@ -220,7 +220,7 @@ while (<>) {
 				}
 				print VUWN "    wn20schema:lexicalForm \"$wrd\"\@ga .\n\n";
 
-				print LINKS "${wrdid}-$pos\tword-$wordid\n";
+				print LINKS "${wrdid}-$pos\tword-$wrdid\n";
 			} else {
 				$seen{$wrdid}++;
 			}
