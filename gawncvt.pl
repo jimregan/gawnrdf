@@ -239,7 +239,7 @@ while (<>) {
 			print VUWN "    rdfs:label \"$wrd\"\@ga ;\n";
 			if ($wnid =~ /([^%]*)%([1-5]):/ && exists $idxsnsvu{$wnid}) {
 				my $vukey = "wn30:wordsense-$1-$w3tmap{$2}-$idxsnsvu{$wnid}";
-				$vukey =~ s/'/_/g;
+				$vukey =~ s/['\.]/_/g;
 				if (exists $vucasemap{$vukey}) {
 					$vukey = $vucasemap{$vukey};
 				}
