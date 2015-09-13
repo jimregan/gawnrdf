@@ -20,6 +20,7 @@ open(VUWN, '>gawn-vu.ttl') or die "$!\n";
 open(LINKS, '>gawn-lemon-vu-links.tsv') or die "$!\n";
 # index.sense from http://wordnetcode.princeton.edu/3.0/WNdb-3.0.tar.gz
 open(SENSES, '<dict/index.sense') or die "$!\n";
+open(VUMAP, '<data/vucasemap') or die "$!\n";
 
 my %posmap = (
 	'n' => 'noun',
@@ -120,6 +121,16 @@ while (<SENSES>) {
 	# We need the sense number to get wordsense links to VU
 	$idxsnsvu{$l[0]} = $l[2];
 }
+close SENSES;
+
+my %vucasemap = ();
+
+while (<VUMAP>) {
+	chomp;
+	my @l = split /\t/, $_;
+	$vucasemap{$l[1]} = $l[0];
+}
+close VUMAP;
 
 # wordnet-gaeilge/en2wn.po
 while (<>) {
@@ -227,7 +238,12 @@ while (<>) {
 			print VUWN "<wordsense-${wrdid}-$w3tmap{$vusnspos}-$seen{$wrdid}> a wn20schema:$w3wsmap{$vusnspos}Sense ;\n";
 			print VUWN "    rdfs:label \"$wrd\"\@ga ;\n";
 			if ($wnid =~ /([^%]*)%([1-5]):/ && exists $idxsnsvu{$wnid}) {
-				print VUWN "    lvont:nearlySameAs wn30:wordsense-$1-$w3tmap{$2}-$idxsnsvu{$wnid} ;\n";
+				my $vukey = "wn30:wordsense-$1-$w3tmap{$2}-$idxsnsvu{$wnid}";
+				$vukey =~ s/'/_/g;
+				if (exists $vucasemap{$vukey}) {
+					$vukey = $vucasemap{$vukey};
+				}
+				print VUWN "    lvont:nearlySameAs $vukey ;\n";
 			}
 			print VUWN "    wn20schema:word <word-${wrdid}> .\n\n";
 			print VUWN "<synset-$syn> wn20schema:containsWordSense <wordsense-${wrdid}-$w3tmap{$vusnspos}-$seen{$wrdid}> .\n";
