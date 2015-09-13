@@ -7,3 +7,4 @@ rapper -i turtle -o ntriples glg-30-lmf.v2.xml.ttl |grep '^<http://lodserver.iul
 sort /tmp/mcrrdf.nt | uniq > /tmp/mcruniq.nt
 rm /tmp/mcrrdf.nt
 # 
+rapper -i turtle -o ntriples gawn-lemon.ttl  |grep 'nearlySameAs> <http://lodserver.iula.upf.edu/id/WordNetLemon/EN/eng' > /tmp/mcr-links.nt
