@@ -24,4 +24,5 @@ while (<>) {
 		$last = $prop;
 	}
 }
+print "\t\"$last\" => [\"" . join('", "', @parts) . "\"],\n";
 print ");\n";
