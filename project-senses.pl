@@ -9,12 +9,14 @@ open (EN, "<$ARGV[1]") or die "$!\n";
 open (ALIGNONE, ">$ARGV[1]-proj-single.ttl") or die "$!\n";
 open (ALIGNMULT, ">$ARGV[1]-proj-mult.ttl") or die "$!\n";
 open (ALIGNFILT, ">$ARGV[1]-proj-filt.ttl") or die "$!\n";
+open (DECOMP, ">$ARGV[1]-proj-decomp.ttl") or die "$!\n";
 
 binmode LINKS, ":utf8";
 binmode EN, ":utf8";
 binmode ALIGNONE, ":utf8";
 binmode ALIGNMULT, ":utf8";
 binmode ALIGNFILT, ":utf8";
+binmode DECOMP, ":utf8";
 binmode STDERR, ":utf8";
 
 my %tomatch = ();
@@ -84,10 +86,10 @@ while (<EN>) {
 									# TODO: here, do decomposition
 									my $decompl = $luri;
 									$decompl =~ s!wordsense!decomposition!;
-									print STDERR "<$decompl> lemon:decomposition (\n";
-#									print STDERR " [ lemon:element affix:$affixmap{$wd} ]\n";
-									print STDERR " [ lemon:element affix:$prefix ]\n";
-									print STDERR " [ lemon:element <$suri> ] ) .\n\n";
+									print DECOMP "<$decompl> lemon:decomposition (\n";
+#									print DECOMP " [ lemon:element affix:$affixmap{$wd} ]\n";
+									print DECOMP " [ lemon:element affix:$prefix ]\n";
+									print DECOMP " [ lemon:element <$suri> ] ) .\n\n";
 								}
 							}
 						}
