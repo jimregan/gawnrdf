@@ -31,11 +31,11 @@ sub dedouble {
 }
 
 my %prefixes = (
-	'wn20schema:antonymOf' => ['un', 'non', 'a', 'in'],
-	"wn20schema:antonymOf" => ["a", "ab", "an", "ant", "anti", "c", "contra", "counter", "d", "de", "de-", "dis", "e", "ex", "extra", "fe", "hyper", "ig", "il", "im", "in", "inter", "ir", "lessness", "mal", "mis", "n", "no-", "non", "non-", "omni", "other", "ovo", "para", "sub", "super", "syn", "t", "un", "under", "wo"],
+	"wn20schema:antonymOf" => ["a", "ab", "an", "ant", "anti", "contra", "counter", "d", "de", "de-", "dis", "e", "ex", "extra", "hyper", "ig", "il", "im", "in", "inter", "ir", "mal", "mis", "no-", "non", "non-", "omni", "other", "ovo", "para", "sub", "super", "syn", "un", "under"],
 );
 
 my %suffixes = (
+	'wn20schema:antonymOf' => ["lessness"],
 	'wn20schema:adjectivePertainsTo' => ['ical', 'ish', 'ural', 'ic', 'ine', 'ate', 'ly', 'an', 'n', 'nical', 'atic', 'ine'],
 	'wn20schema:adverbPertainsTo' => ['ly', 'erly', 'y', 'ally'],
 	"wnschema:agent" => ["ate", "ation", "e", "ee", "eer", "er", "ion", "ior", "ise", "ize", "ker", "or", "r", "yer"],
