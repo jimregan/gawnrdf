@@ -15,6 +15,7 @@ binmode EN, ":utf8";
 binmode ALIGNONE, ":utf8";
 binmode ALIGNMULT, ":utf8";
 binmode ALIGNFILT, ":utf8";
+binmode STDERR, ":utf8";
 
 my %tomatch = ();
 
@@ -27,7 +28,7 @@ sub delenite {
 }
 
 my %prefixes = (
-	'antonymOf' => ['neamh', 'neamh-', 'mí', 'éa', 'éi', 'dios'],
+	'antonymOf' => ['neamh', 'neamh-', 'mí', 'éa', 'éi', 'dios', 'droch', 'dí'],
 );
 
 while (<LINKS>) {
@@ -59,6 +60,8 @@ while (<EN>) {
 							$pfx = join('|', @{$prefixes{$key}});
 							my $long = '';
 							my $short = '';
+							my $luri = $mo;
+							my $suri = $ms;
 							if ($mo =~ m!/wordsense\-(.*)\-(noun|adjective|verb|adverb)!) {
 								$long = $1;
 							}
@@ -69,14 +72,22 @@ while (<EN>) {
 								my $tmp = $short;
 								$short = $long;
 								$long = $tmp;
+								$luri = $mo;
+								$suri = $ms;
 							}
 							if ($long =~ /^($pfx)(.*)/) {
+								my $prefix = $1;
 								my $wd = $2;
 								my $dlwd = delenite($wd);
-print STDERR "$dlwd\n";
 								if ($short eq delenite($wd)) {
 									print ALIGNFILT "<$ms> <$p> <$mo> .\n";
 									# TODO: here, do decomposition
+									my $decompl = $luri;
+									$decompl =~ s!wordsense!decomposition!;
+									print STDERR "<$decompl> lemon:decomposition (\n";
+#									print STDERR " [ lemon:element affix:$affixmap{$wd} ]\n";
+									print STDERR " [ lemon:element affix:$prefix ]\n";
+									print STDERR " [ lemon:element <$suri> ] ) .\n\n";
 								}
 							}
 						}
