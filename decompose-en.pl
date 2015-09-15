@@ -31,12 +31,12 @@ sub dedouble {
 }
 
 my %prefixes = (
-	'antonymOf' => ['un', 'non', 'a', 'in'],
+	'wn20schema:antonymOf' => ['un', 'non', 'a', 'in'],
 );
 
 my %suffixes = (
-	'adjectivePertainsTo' => ['ical', 'ish', 'ural', 'ic', 'ine', 'ate', 'ly', 'an', 'n', 'nical', 'atic', 'ine'],
-	'adverbPertainsTo' => ['ly', 'erly', 'y', 'ally'],
+	'wn20schema:adjectivePertainsTo' => ['ical', 'ish', 'ural', 'ic', 'ine', 'ate', 'ly', 'an', 'n', 'nical', 'atic', 'ine'],
+	'wn20schema:adverbPertainsTo' => ['ly', 'erly', 'y', 'ally'],
 	"wnschema:agent" => ["ate", "ation", "e", "ee", "eer", "er", "ion", "ior", "ise", "ize", "ker", "or", "r", "yer"],
 	"wnschema:body-part" => ["ate", "er", "or", "r"],
 	"wnschema:by_means_of" => ["ance", "ate", "ation", "ence", "er", "fy", "ify", "ion", "ise", "ition", "ize", "ment", "or", "r"],
@@ -50,6 +50,7 @@ my %suffixes = (
 	"wnschema:state" => ["ance", "ation", "ence", "ion", "ise", "ize", "ment", "nce", "or"],
 	"wnschema:undergoer" => ["al", "ance", "ation", "e", "ee", "ence", "er", "ify", "ion", "ize", "ment", "nce", "r"],
 	"wnschema:uses" => ["alize", "ament", "ance", "ate", "ation", "ify", "ing", "ise", "ize", "ment"],
+	"wnschema:vehicle" => ["er", "or", "r"],
 );
 
 my %affixsense = (
