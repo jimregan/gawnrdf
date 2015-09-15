@@ -1,0 +1,36 @@
+@prefix lemon: <http://lemon-model.net/lemon#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#>
+@prefix affix: <file:///FIXME/> .
+
+affix:antonymFormation
+  a lemon:Synset ;
+  rdfs:label "antonym formation"@en ;
+  rdfs:description "affix used in the creation of an antonym"@en .
+
+affix:entry-mí1
+  a lemon:Part ;
+  lemon:form affix:form-mí1 ;
+  lemon:sense affix:sense-mí1 .
+
+affix:form-mí1
+  a lemon:Form ;
+  lemon:writtenRep "mí"@ga .
+
+affix:sense-mí1
+  a lemon:LexicalSense ;
+  lemon:reference affix:antonymFormation .
+
+affix:entry-un1
+  a lemon:Part ;
+  lemon:form affix:form-un1 ;
+  lemon:sense affix:sense-un1 .
+
+affix:form-un1
+  a lemon:Form ;
+  lemon:writtenRep "un"@en .
+
+affix:sense-un1
+  a lemon:LexicalSense ;
+  lemon:reference affix:antonymFormation .
+
+
