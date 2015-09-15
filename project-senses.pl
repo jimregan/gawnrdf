@@ -33,6 +33,17 @@ my %prefixes = (
 	'antonymOf' => ['neamh', 'neamh-', 'mí', 'éa', 'éi', 'dios', 'droch', 'dí'],
 );
 
+my %affixsense = (
+	'antonymOf_neamh' => 'neamh1',
+	'antonymOf_neamh-' => 'neamh-1',
+	'antonymOf_mí' => 'mí1',
+	'antonymOf_éa' => 'éa1',
+	'antonymOf_éi' => 'éi1',
+	'antonymOf_dios' => 'dios1',
+	'antonymOf_droch' => 'droch1',
+	'antonymOf_dí' => 'dí1',
+);
+
 while (<LINKS>) {
 	if (m!<([^>]*)> <http://lexvo.org/ontology#nearlySameAs> <([^>]*)>!) {
 		my $ga = $1;
@@ -85,7 +96,7 @@ while (<EN>) {
 								my $dlwd = delenite($wd);
 								if ($short eq delenite($wd)) {
 									print ALIGNFILT "<$ms> <$p> <$mo> .\n";
-									# TODO: here, do decomposition
+									# TODO: introduce intermediate nodes, which can be aligned
 									my $decompl = $luri;
 									$decompl =~ s!wordsense!decomposition!;
 									print DECOMP "<$decompl> lemon:decomposition (\n";
