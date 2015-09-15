@@ -44,9 +44,6 @@ while (<>) {
 			$seen{$parts[1] . $aff} = 1;
 		} else {
 			$seen{$parts[1] . $aff}++;
-			if ($aff eq 'fe' || $aff eq 't') {
-				print STDERR "f:: $left $right\n";
-			}
 		}
 	}
 }
