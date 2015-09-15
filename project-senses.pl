@@ -41,6 +41,8 @@ while (<LINKS>) {
 	}
 }
 
+print DECOMP "\@prefix lemon: <http://lemon-model.net/lemon#> .\n\n";
+
 while (<EN>) {
 	if (m!<([^>]*)> <([^>]*)> <([^>]*)>!) {
 		my $s = $1;
