@@ -28,6 +28,12 @@ while (<>) {
 		print STDERR "Line $. does not match: $_\n";
 	}
 
+	if (length $left > length $right) {
+		my $tmp = $right;
+		$right = $left;
+		$left = $tmp;
+	}
+
 	if ($right =~ /$left/) {
 		my $aff = $right;
 		$aff =~ s/$left//;
