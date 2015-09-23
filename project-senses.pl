@@ -30,7 +30,7 @@ sub delenite {
 }
 
 my %prefixes = (
-	'antonymOf' => ['neamh', 'neamh-', 'mí', 'éa', 'éi', 'dios', 'droch', 'dí'],
+	'antonymOf' => ['neamh', 'neamh-', 'mí', 'éa', 'éi', 'dios', 'dis', 'dí', 'droch', 'droch-', 'dí', 'frith', 'iar'],
 );
 
 my %affixsense = (
@@ -40,8 +40,13 @@ my %affixsense = (
 	'antonymOf_éa' => 'éa1',
 	'antonymOf_éi' => 'éi1',
 	'antonymOf_dios' => 'dios1',
-	'antonymOf_droch' => 'droch1',
+	'antonymOf_dis' => 'dis1',
 	'antonymOf_dí' => 'dí1',
+	'antonymOf_droch' => 'droch1',
+	'antonymOf_droch-' => 'droch-1',
+	'antonymOf_dí' => 'dí1',
+	'antonymOf_frith' => 'frith1',
+	'antonymOf_iar' => 'iar1',
 );
 
 while (<LINKS>) {
